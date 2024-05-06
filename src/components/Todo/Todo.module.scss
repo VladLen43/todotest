@@ -8,7 +8,41 @@
     margin-bottom: 10px;
     border-radius: 10px;
     background-color: #15101C;
-    color:#9E78CF;;
+    color:#9E78CF;
+
+        .edit_todo{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
+            input {
+                padding: 10px;
+                border: 1px solid #9E78CF;
+                border-radius: 10px;
+                background-color: #1D1825;
+                font-size: 16px;
+                font-weight: 400;
+                outline: none;
+                color:#9E78CF;
+            }
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 80%;
+                padding: 10px;
+                background-color: #9E78CF;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                font-size: 16px;
+                font-weight: 100;
+            }
+            button:hover {
+                cursor: pointer;
+            }
+        }
 
     .buttons {
         display: flex;
