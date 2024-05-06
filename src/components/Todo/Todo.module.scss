@@ -1,3 +1,83 @@
 .todo_container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:20px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #15101C;
+    color:#9E78CF;
+
+        .edit_todo{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
+            input {
+                padding: 10px;
+                border: 1px solid #9E78CF;
+                border-radius: 10px;
+                background-color: #1D1825;
+                font-size: 16px;
+                font-weight: 400;
+                outline: none;
+                color:#9E78CF;
+            }
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 80%;
+                padding: 10px;
+                background-color: #9E78CF;
+                border: none;
+                border-radius: 10px;
+                color: white;
+                font-size: 16px;
+                font-weight: 100;
+            }
+            button:hover {
+                cursor: pointer;
+            }
+        }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+        .todo_complete {
+
+            svg {
+                opacity: 0;;
+                color: white;
+                background-color: transparent;
+                transition: all 0.5s ease-in-out;
+            }
+            svg:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+    }
+    .delete_button {
+        svg {
+            opacity: 0;
+            color: white;
+            background-color: transparent;
+            transition: all 0.5s ease-in-out;
+        }
+        svg:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}
+    
+    
+}
+.todo_container:hover {
+    svg{
+        opacity:1 !important;
+    }
 }

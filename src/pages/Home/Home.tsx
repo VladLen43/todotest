@@ -11,9 +11,12 @@ import { Todo } from '../../components/Todo/Todo'
 
 export const Home = observer(() => {
 
+    const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
+
   return (
-    <div>
+    <div className={styles.main}>
         <TodoAdd />
+        <h3>Task to do - {TodoStore.todos.length}</h3>
         <div className={styles.list}>
             {
                 TodoStore.todos.map((td,index) =>(
@@ -23,10 +26,10 @@ export const Home = observer(() => {
             }
         </div>
         <div className={styles.list_done}>
-            <h1>Выполненные:</h1>
+            <h3>Done - {doneTodos.length}</h3>
             {
-                TodoStore.todos.map((t,index) => (
-                    <div key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
+                doneTodos.map((t,index) => (
+                    <div className={styles.done} key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
                 ))
             }
         </div>
