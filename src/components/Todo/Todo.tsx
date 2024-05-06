@@ -54,9 +54,9 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
         className={styles.todo_complete}
         onClick={() => todo.completeTodo(id)}
         
-      >{completed ? 
-           <AcceptSvg />  : <AcceptSvg />
-}
+      >
+           <AcceptSvg />  
+        
       </div>
       
       <div
