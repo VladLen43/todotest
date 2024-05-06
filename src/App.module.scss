@@ -1,0 +1,17 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        .list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            
+        }
+}
