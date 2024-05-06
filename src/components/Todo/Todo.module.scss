@@ -1,3 +1,46 @@
 .todo_container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #15101C;
+    color:#9E78CF;;
+
+
+    .todo_complete {
+
+            svg {
+                opacity: 0;;
+                color: white;
+                background-color: transparent;
+                transition: all 0.5s ease-in-out;
+            }
+            svg:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+    }
+    .delete_button {
+        svg {
+            opacity: 0;
+            color: white;
+            background-color: transparent;
+            transition: all 0.5s ease-in-out;
+        }
+        svg:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+    
+    
+}
+.todo_container:hover {
+    svg{
+        opacity: 1;
+    }
 }
