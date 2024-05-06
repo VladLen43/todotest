@@ -1,17 +1,19 @@
 .todo_container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap:20px;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
     background-color: #15101C;
     color:#9E78CF;;
 
-
-    .todo_complete {
+    .buttons {
+        display: flex;
+        gap: 10px;
+        .todo_complete {
 
             svg {
                 opacity: 0;;
@@ -36,11 +38,12 @@
             cursor: pointer;
         }
     }
+}
     
     
 }
 .todo_container:hover {
     svg{
-        opacity: 1;
+        opacity:1 !important;
     }
 }

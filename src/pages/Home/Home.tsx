@@ -14,9 +14,9 @@ export const Home = observer(() => {
     const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 
   return (
-    <div>
+    <div className={styles.main}>
         <TodoAdd />
-        <h1>Task to do - {TodoStore.todos.length}</h1>
+        <h3>Task to do - {TodoStore.todos.length}</h3>
         <div className={styles.list}>
             {
                 TodoStore.todos.map((td,index) =>(
@@ -26,10 +26,10 @@ export const Home = observer(() => {
             }
         </div>
         <div className={styles.list_done}>
-        <h1>Done - {doneTodos.length}</h1>
+            <h3>Done - {doneTodos.length}</h3>
             {
                 doneTodos.map((t,index) => (
-                    <div key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
+                    <div className={styles.done} key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
                 ))
             }
         </div>

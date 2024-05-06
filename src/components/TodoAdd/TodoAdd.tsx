@@ -13,13 +13,16 @@ export const TodoAdd = observer(() => {
         title: inputText,
         completed: false
        }
-
+       if(td.title.length > 0) {
        todo.addTodo(td)
+       } else {
+        alert('Error, no title')
+       }
     }
   return (
     <div className={styles.todoAddBlock}>
 
-            <input type="text" onChange={(e) => setInputText(e.target.value)} />
+            <input type="text" placeholder='Add new task' onChange={(e) => setInputText(e.target.value)} />
             <button onClick={todoAdd}>+</button>
             
         </div>

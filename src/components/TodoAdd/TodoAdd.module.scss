@@ -1,4 +1,33 @@
 .todoAddBlock {
     display: flex;
     gap:20px;
+
+        input {
+            padding: 10px;
+            border: 1px solid #9E78CF;
+            border-radius: 10px;
+            background-color: #1D1825;
+            font-size: 16px;
+            font-weight: 400;
+            outline: none;
+            color:#9E78CF;
+        }
+        input:placeholder{
+            color:#777777;
+        }
+
+        button{
+            width: 35px;
+            height: 100%;
+            background-color: #9E78CF;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 30px;
+            font-weight: 100;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+        
 }
