@@ -12,9 +12,10 @@ import { when } from 'mobx'
 
 
 
+
 export const Home = observer(() => {
 
-    const [isAuth, setIsAuth] = useState(true)
+    const [isAuth, setIsAuth] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {   
@@ -22,18 +23,23 @@ export const Home = observer(() => {
             () => users.user.access === false,
             () => {
             navigate('/login')
-    }
-  );
+        }
+    );
   
-},[])
+    },[])
 
-    const logout = () => {
-        setIsAuth(false)
-    }
+    // useEffect(() => {
+    //     if(localStorage.getItem('user')) {
+    //         setIsAuth(true)
+    //     }
+    //     else {
+    //         setIsAuth(false)
+    //     }
+    // },[])
 
-
-
-    
+    // useEffect(() => {
+    //     if(isAuth === true) 
+    // },[]) 
 
     const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 
@@ -57,8 +63,8 @@ export const Home = observer(() => {
                 ))
             }
         </div>
-        <div><Link to='/login'>Авторизоваться </Link></div>
-        <button onClick={() => users.removeUser()}>Выйти</button>
+        <div><Link to='/login'> Авторизоваться </Link></div>
+        <button onClick={() => users.removeUser()}> Выйти </button>
     </div>
   )
 })
