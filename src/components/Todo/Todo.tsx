@@ -3,6 +3,7 @@ import todo from "../../store/todo";
 import styles from "./Todo.module.scss";
 import { AcceptSvg } from "./AcceptSvg";
 import { TrashCanSvg } from "./TrashCanSvg";
+import { Link } from "react-router-dom";
 
 type TodoProps = {
   id: string;
@@ -52,8 +53,7 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
     <div className={styles.buttons}>
       <div
         className={styles.todo_complete}
-        onClick={() => todo.completeTodo(id)}
-        
+        onClick={() => todo.completeTodo(id)}    
       >
            <AcceptSvg />  
         
@@ -66,6 +66,6 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
        <TrashCanSvg />
       </div>
     </div>
-    </div>
+</div>
   );
 };
