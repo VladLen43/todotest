@@ -29,10 +29,7 @@ class Auth {
         this.user.access = false;
         console.log(this.user.access)
     }
-    
-    // loginUser(id: string) {
-    //     this.user = this.user.map(user => user.id === id ? {...user, access : !user.access} : user)
-    // }
+
   
 }
 export default new Auth()

@@ -57,8 +57,7 @@ export const Home = observer(() => {
                 ))
             }
         </div>
-        <div><Link to='/login'>Авторизоваться </Link></div>
-        <button onClick={() => users.removeUser()}>Выйти</button>
+    
     </div>
   )
 })
