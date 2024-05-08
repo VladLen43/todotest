@@ -29,7 +29,7 @@ export const Login = observer(() => {
                 access: !users.user.access,
             } 
             users.loginUser(user)
-            console.log(user)
+
         }
         else {
             alert('Введите данные пользователя')
@@ -48,8 +48,11 @@ export const Login = observer(() => {
   return (
     <div className={styles.container}>
             <input type='text' placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
+
             <input type='text' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+
             <button onClick={() => onSubmit()}>Login</button>
+            
             <Link to='/register'>Зарегестироваться</Link>
     </div>
   )
