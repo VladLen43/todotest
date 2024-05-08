@@ -1,20 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Header.module.scss'
 import users from '../../store/auth'
 import { AccountIcon } from './AccountIcon'
 
-export const Header = () => {
 
-    const [hide, setHide] = useState(true)
+export const Header:React.FC = () => {
 
+  const [hide, setHide] = useState(false)
+
+  const ref = useRef<HTMLInputElement>(null);
+
+
+useEffect(() => {
+    const handleClickOutside = (event : any) => {
+    
+      if (ref.current && !ref.current.contains(event.target)) {
+        setHide(false);
+      }
+  }
+        document.addEventListener('click', handleClickOutside);
+
+  return () => {
+    
+          document.removeEventListener('click', handleClickOutside);
+  };
+
+  },[])
+ 
   return (
-    <div className={styles.container}>
-        <div className={styles.buttons}>
-                <button className={styles.parent_button} onClick={() => setHide(!hide)}>
+
+    <div ref={ref} className={styles.container} >
+        <div className={styles.buttons} onClick={(e) => e.stopPropagation()} >
+                <button className={styles.parent_button} onClick={() => {setHide(!hide)}}>
                     <AccountIcon />
                 </button>
-            <button className={hide ? styles.close : styles.open} onClick={() => users.logoutUser()}>Выйти</button>
-            <button className={hide ? styles.close : styles.open} onClick={() => users.removeUser()}>Удалить пользователя</button>
+         
+                <div id={styles.opened_buttons} className={hide ? styles.open : styles.close}>
+
+                      <button onClick={() => users.logoutUser()}>Выйти</button>
+                      <button onClick={() => users.removeUser()}>Удалить пользователя</button>
+
+                </div>
+        
         </div>
     </div>
   )

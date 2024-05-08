@@ -6,6 +6,7 @@ import { Main } from './components/Main/Main';
 import { RegisterPage } from './components/Register/Register';
 
 function App() {
+  
   return (
     <div className={styles.container}>
         <Routes>
