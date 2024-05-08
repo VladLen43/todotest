@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
 import {observer} from 'mobx-react-lite'
-import todo from '../../store/todo'
 import users from '../../store/auth'
-import { todoType } from '../../types'
 import { Todo } from '../../components/Todo/Todo'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { when } from 'mobx'
-
 
 
 
 export const Home = observer(() => {
 
-    const [isAuth, setIsAuth] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {   
@@ -28,20 +24,8 @@ export const Home = observer(() => {
   
     },[])
 
-    // useEffect(() => {
-    //     if(localStorage.getItem('user')) {
-    //         setIsAuth(true)
-    //     }
-    //     else {
-    //         setIsAuth(false)
-    //     }
-    // },[])
 
-    // useEffect(() => {
-    //     if(isAuth === true) 
-    // },[]) 
-
-    const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
+  const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 
   return (
     <div className={styles.main}>
@@ -63,8 +47,7 @@ export const Home = observer(() => {
                 ))
             }
         </div>
-        <div><Link to='/login'> Авторизоваться </Link></div>
-        <button onClick={() => users.removeUser()}> Выйти </button>
+
     </div>
   )
 })
