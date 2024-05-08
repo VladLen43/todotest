@@ -10,33 +10,28 @@ export const RegisterPage = () => {
 
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
     const navigate = useNavigate();
 
     const onSubmit = () => {
         if(userName.length > 0 || password.length > 0) {
 
             const user = {
-                id: Date.now().toString(),
-                username: userName,
+                fullName: userName,
                 password: password,
-                access: true,
+                email: email,
+                avatarUrl: 'eeesss',
+                
             }
             console.log(user)
-            navigate('/login')
+            
 
             users.addUser(user)
+            navigate('/login')
     }
     }
   
-        useEffect(() => {   
-            when(
-                () => users.user.access === true,
-                () => {
-                navigate('/')
-            }
-        );
-      
-        },[])
+        
 
     
   return (
@@ -44,6 +39,8 @@ export const RegisterPage = () => {
 
         <input type="text" placeholder='Select your name' value={userName} onChange={(e) => setUserName(e.target.value)} />
 
+        <input type="text" placeholder='email'value={email} onChange={(e) => setEmail(e.target.value)} />
+        
         <input type="text" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
 
         <button onClick={() => onSubmit()}>Register</button>

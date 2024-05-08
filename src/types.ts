@@ -7,13 +7,15 @@ export type todoType = {
     title: string;
     completed: boolean;
     user: string;
+
 }
 
 export type UserType = { 
-    "id": string;
-    "username": string;
-    "password": string;
-    "access": boolean;
+    fullName: string;
+    password: string;
+    email: string;
+    avatarUrl: string;
+    access: boolean;
 }
 
 export type UserList = {

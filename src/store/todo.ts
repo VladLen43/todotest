@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx"
-import { todoType, todosList } from "../types"
+import { todoType } from "../types"
 
 class Todo {
 
