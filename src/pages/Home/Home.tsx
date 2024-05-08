@@ -28,18 +28,6 @@ export const Home = observer(() => {
   
     },[])
 
-    // useEffect(() => {
-    //     if(localStorage.getItem('user')) {
-    //         setIsAuth(true)
-    //     }
-    //     else {
-    //         setIsAuth(false)
-    //     }
-    // },[])
-
-    // useEffect(() => {
-    //     if(isAuth === true) 
-    // },[]) 
 
     const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 

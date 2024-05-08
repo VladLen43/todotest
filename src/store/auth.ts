@@ -6,14 +6,7 @@ const user = localStorage.getItem("user") ? true : false;
 
 class Auth {
 
-    users = [
-    {
-        id: "1",
-        username: "vlad",
-        password: "1234",
-        access: true,
-    }
-]
+    users = JSON.parse(localStorage.getItem("users") || "[]")
 
     user: UserType = {
             id: "",
@@ -28,7 +21,7 @@ class Auth {
     }
     loginUser(userData: UserType) {
 
-        if(this.users.find((user) => user.username === userData.username)) {
+        if(this.users.find((user : UserType) => user.username === userData.username)) {
             this.user.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
@@ -45,13 +38,10 @@ class Auth {
     }
 
     addUser(userData: UserType) {
-        if(this.users.find((user) => user.username !== userData.username))
+        if(this.users.find((user : UserType) => user.username !== userData.username))
         this.users.push(userData)
     }
     
-    // loginUser(id: string) {
-    //     this.user = this.user.map(user => user.id === id ? {...user, access : !user.access} : user)
-    // }
-  
+
 }
 export default new Auth()
