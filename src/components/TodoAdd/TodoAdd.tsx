@@ -2,10 +2,14 @@ import React, { useEffect } from 'react'
 import styles from './TodoAdd.module.scss'
 import {observer} from 'mobx-react-lite'
 import todo from '../../store/todo'
+import users from '../../store/auth'
 
 export const TodoAdd = observer(() => {
 
     const [inputText, setInputText] = React.useState('')
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}') 
+
 
     useEffect(() => {
       
@@ -16,7 +20,8 @@ export const TodoAdd = observer(() => {
        const td = {
         id: Date.now().toString(),
         title: inputText,
-        completed: false
+        completed: false,
+        user: user.username,
        }
        if(td.title.length > 0) {
 

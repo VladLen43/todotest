@@ -6,6 +6,7 @@ export type todoType = {
     id: string;
     title: string;
     completed: boolean;
+    user: string;
 }
 
 export type UserType = { 

@@ -25,16 +25,20 @@ export const Home = observer(() => {
   
     },[])
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}') 
+  console.log(user)
 
-  const doneTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === true)
+  const UserTodos = TodoStore.todos.filter((todo : todoType) => todo.user === user.username)
+
+  const doneTodos = UserTodos.filter((todo: todoType) => todo.completed === true)
 
   return (
     <div className={styles.main}>
         <TodoAdd />
-        <h3>Task to do - {TodoStore.todos.length}</h3>
+        <h3>Task to do - {UserTodos.length}</h3>
         <div className={styles.list}>
             {
-                TodoStore.todos.map((td: todoType) =>(
+                UserTodos.map((td: todoType) =>(
 
                     <div key={td.id}>{td.completed === false ? <Todo id ={td.id} title={td.title} completed={td.completed} /> : <div></div> } </div>
                 ) )
