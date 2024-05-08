@@ -15,7 +15,8 @@ export const Login = observer(() => {
     const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
     const localUser : UserType = localUsers.filter((user: UserType) => user.username === username);
     const id = localUser.id;
-       
+    
+    console.log(id)
 
     const  navigate = useNavigate()
 

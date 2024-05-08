@@ -14,10 +14,10 @@ class Auth {
     users = JSON.parse(localStorage.getItem('users')||'[]')
 
     user: UserType = {
-            "id": "",
-            "username": "",
-            "password":   "",
-            "access": user,
+            id: "",
+            username: "",
+            password:   "",
+            access: user,
         }
 
     constructor() {
@@ -27,7 +27,8 @@ class Auth {
 
     loginUser(userData: UserType) {
         
-        if(this.users.id === userData.id) {
+        console.log(userData)
+        if(this.users.find((user : UserType) => user.username === userData.username)) {
             this.user.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
@@ -48,8 +49,10 @@ class Auth {
         localStorage.setItem("users", JSON.stringify(this.users));
  
     }
-    removeUser() {
-        localStorage.removeItem('users')
+    removeUser(username : string) {
+        console.log(username)
+        this.users = this.users.filter((user : UserType) => user.username !== username)
+        localStorage.setItem('users', JSON.stringify(this.users));
         this.user.access = false;
     }
 

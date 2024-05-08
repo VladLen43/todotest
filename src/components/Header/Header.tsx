@@ -10,6 +10,10 @@ export const Header:React.FC = () => {
 
   const ref = useRef<HTMLInputElement>(null);
 
+  const user = JSON.parse(localStorage.getItem('user')|| '[]')
+
+  console.log(user)
+
 
 useEffect(() => {
     const handleClickOutside = (event : any) => {
@@ -38,7 +42,7 @@ useEffect(() => {
                 <div id={styles.opened_buttons} className={hide ? styles.open : styles.close}>
 
                       <button onClick={() => users.logoutUser()}>Выйти</button>
-                      <button onClick={() => users.removeUser()}>Удалить пользователя</button>
+                      <button onClick={() => users.removeUser(user.username)}>Удалить пользователя</button>
 
                 </div>
         
