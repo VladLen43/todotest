@@ -47,13 +47,14 @@ export const Login = observer(() => {
     
   return (
     <div className={styles.container}>
+
             <input type='text' placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
 
             <input type='text' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
 
             <button onClick={() => onSubmit()}>Login</button>
             
-            <Link to='/register'>Зарегестироваться</Link>
-    </div>
+            <Link className={styles.reg_link} to='/register'>Register</Link>
+   </div>
   )
 })
