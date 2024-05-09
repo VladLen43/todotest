@@ -7,20 +7,6 @@ import { Header } from '../Header/Header'
 
 export const Main = ({children} : any) => { 
 
-//   const navigate = useNavigate()
-
-//   const [status, setStatus] = useState(true)
-
-//   useEffect(() => {   
-//     when(
-//         () => users.user.access === false,
-//         () => {
-//         navigate('/login')
-//         setStatus(false)
-// }
-// );
-
-// },[])
 
   return (
     <div className={styles.container}>

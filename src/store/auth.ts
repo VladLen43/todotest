@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx"
-import { UserList, UserType } from "../types"
+import { UserType } from "../types"
 
 
 const user = localStorage.getItem("user") ? true : false;
