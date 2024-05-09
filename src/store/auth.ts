@@ -8,13 +8,7 @@ class Auth {
 
     users = JSON.parse(localStorage.getItem("users") || "[]")
 
-    user: UserType = {
-            id: "",
-            username: "",
-            password: "",
-            access: user,
-    
-        }
+    access = user ? true : false
 
     constructor() {
         makeAutoObservable(this)
@@ -22,7 +16,7 @@ class Auth {
     loginUser(userData: UserType) {
 
         if(this.users.find((user : UserType) => user.username === userData.username)) {
-            this.user.access = true;
+            this.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
     }
@@ -32,8 +26,8 @@ class Auth {
    
     }
     removeUser() {
-        this.user.access = false;
-        console.log(this.user.access)
+        this.access = false;
+        console.log(this.access)
         localStorage.removeItem("user")
     }
 

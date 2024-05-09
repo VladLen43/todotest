@@ -17,7 +17,7 @@ export const Login = observer(() => {
                 id: "1",
                 username: username,
                 password: password,
-                access: !users.user.access,
+                access: !users.access,
             } 
             users.loginUser(user)
         }
@@ -26,12 +26,10 @@ export const Login = observer(() => {
         }
     }
 
-    // useEffect(() => {
-    //     asd
-    // },[])
+  
     useEffect(() => {   
         when(
-            () => users.user.access === true,
+            () => users.access === true,
             () => {
             navigate('/')
         }
