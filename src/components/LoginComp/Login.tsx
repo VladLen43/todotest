@@ -16,7 +16,7 @@ export const Login = observer(() => {
                 id: Date.now().toString(),
                 username: username,
                 password: password,
-                access: !users.user.access,
+                access: !users.access,
             } 
             users.loginUser(user)
         }
@@ -26,7 +26,7 @@ export const Login = observer(() => {
     }
     useEffect(() => {   
         when(
-            () => users.user.access === true,
+            () => users.access === true,
             () => {
             navigate('/')
         }

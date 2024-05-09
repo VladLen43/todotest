@@ -1,33 +1,28 @@
 import { makeAutoObservable } from "mobx"
-import { UserList, UserType } from "../types"
+import {  UserType } from "../types"
 
 
 
 
 class Auth {
- user: UserType = {
-            id: "",
-            username: "vlad",
-            password: "1234",
-            access: false,
-    
-        }
+
+    user = localStorage.getItem("user")
+
+    access = this.user ? true : false
 
     constructor() {
         makeAutoObservable(this)
     }
     loginUser(users: UserType) {
-
+        // Временное решения (TODO: добавить базу юзеров)
         if(users.username === "vlad" && users.password === "1234") {
 
-        this.user.access = true;
-        console.log(this.user.access)
+        this.access = true;
     }
    
     }
     removeUser() {
-        this.user.access = false;
-        console.log(this.user.access)
+        this.access = false;
     }
 
   
