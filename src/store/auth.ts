@@ -1,24 +1,14 @@
 import { makeAutoObservable } from "mobx"
-import { UserList, UserType } from "../types"
-import axios from 'axios'
-import { useEffect, useState } from "react";
-import { access } from "fs";
-
-
-const user = localStorage.getItem("user") ? true : false;
+import { UserType } from "../types"
 
 
 class Auth {
 
+    users = JSON.parse(localStorage.getItem("users") || "[]")
 
-    users = JSON.parse(localStorage.getItem('users')||'[]')
+    user = localStorage.getItem("user")
 
-    user: UserType = {
-            id: "",
-            username: "",
-            password:   "",
-            access: user,
-        }
+    access = this.user ? true : false
 
     constructor() {
         makeAutoObservable(this)
@@ -27,9 +17,8 @@ class Auth {
 
     loginUser(userData: UserType) {
         
-        console.log(userData)
-        if(this.users.find((user : UserType) => user.username === userData.username)) {
-            this.user.access = true;
+        if(this.users.find((user : UserType) => user.id === userData.id)) {
+            this.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
         }
@@ -39,28 +28,25 @@ class Auth {
    
     }
     logoutUser() {
-        this.user.access = false;
-        console.log(this.user.access)
+        this.access = false;
         localStorage.removeItem("user")
     }
 
     addUser(userData: UserType) {
-        this.users.push(userData);
-        localStorage.setItem("users", JSON.stringify(this.users));
- 
+        if(this.users.find((user : UserType) => user.id !== userData.id)){
+            this.users.push(userData)
+            localStorage.setItem("users", JSON.stringify(userData))
+        }
     }
     removeUser(username : string) {
         console.log(username)
         this.users = this.users.filter((user : UserType) => user.username !== username)
         localStorage.setItem('users', JSON.stringify(this.users));
-        this.user.access = false;
+        this.access = false;
     }
 
     
     
-    // loginUser(id: string) {
-    //     this.user = this.user.map(user => user.id === id ? {...user, access : !user.access} : user)
-    // }
-  
+
 }
 export default new Auth()

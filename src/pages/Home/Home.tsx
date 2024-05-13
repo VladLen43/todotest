@@ -17,7 +17,7 @@ export const Home = observer(() => {
 
     useEffect(() => {   
         when(
-            () => users.user.access === false,
+            () => users.access === false,
             () => {
             navigate('/login')
         }
@@ -59,7 +59,6 @@ export const Home = observer(() => {
                 ))
               }
         </div>
-
     </div>
   )
 })
