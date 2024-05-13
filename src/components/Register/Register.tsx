@@ -21,7 +21,6 @@ export const RegisterPage = () => {
                 avatarUrl: 'eeesss',
                 
             }
-            console.log(user)
             
 
             users.addUser(user)
@@ -36,14 +35,8 @@ export const RegisterPage = () => {
     <div className={styles.container}>
 
         <input type="text" placeholder='Select your name' value={userName} onChange={(e) => setUserName(e.target.value)} />
-
-        <input type="text" placeholder='email'value={email} onChange={(e) => setEmail(e.target.value)} />
-        
-        <input type="text" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
-
-        <button onClick={() => onSubmit()}>Register</button>
-
-        <Link className={styles.log_link} to='/login'>Login</Link>
+        <input type="password" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button onClick={() => onSubmit()}>Зарегестироваться</button>
     </div>
   )
 }
