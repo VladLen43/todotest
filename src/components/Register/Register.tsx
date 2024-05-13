@@ -30,7 +30,7 @@ export const RegisterPage = () => {
   
         useEffect(() => {   
             when(
-                () => users.user.access === true,
+                () => users.access === true,
                 () => {
                 navigate('/')
             }
