@@ -6,7 +6,7 @@ import { AccountIcon } from './AccountIcon'
 
 export const Header:React.FC = () => {
 
-  const [hide, setHide] = useState(false)
+  const [isHide, setIsHide] = useState(false)
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -15,7 +15,7 @@ useEffect(() => {
     const handleClickOutside = (event : any) => {
     
       if (ref.current && !ref.current.contains(event.target)) {
-        setHide(false);
+        setIsHide(false);
       }
   }
         document.addEventListener('click', handleClickOutside);
@@ -31,11 +31,11 @@ useEffect(() => {
 
     <div ref={ref} className={styles.container} >
         <div className={styles.buttons} onClick={(e) => e.stopPropagation()} >
-                <button className={styles.parent_button} onClick={() => {setHide(!hide)}}>
+                <button className={styles.parent_button} onClick={() => {setIsHide(!isHide)}}>
                     <AccountIcon />
                 </button>
          
-                <div id={styles.opened_buttons} className={hide ? styles.open : styles.close}>
+                <div id={styles.opened_buttons} className={isHide ? styles.open : styles.close}>
 
                       <button onClick={() => users.removeUser()}>Выйти</button>
 

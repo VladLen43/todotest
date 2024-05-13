@@ -22,10 +22,7 @@
                 padding: 10px;
                 border: none;
                 color: white;
-                background-color:#9E78CF;
-                
-                
-        
+                background-color:#9E78CF;               
         }
         
         #opened_buttons {
@@ -35,12 +32,10 @@
         }
         .open{
             opacity: 1;
-            border-radius: 0px;
         }
         .close {
             opacity: 0;
             background-color: transparent;
-            border-radius: 0px;
 
         }
     }
