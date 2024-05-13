@@ -15,14 +15,14 @@ export const Todo = ({td}: ITodo): JSX.Element => {
   const [newTitle, setNewTitle] = useState("");
 
   const changeTodoTitle = (id: string) => {
-    if(newTitle.length !== 0){
+    if(newTitle.length > 0){
       todos.editTodo(id, 'title', newTitle) 
     }
  
   };
 
   const changeTodoStatus = (id: string) => {
-    todos.editTodo(id, 'completed', td.completed)
+    todos.editTodo(id, 'completed', !td.isDone)
   }
   const back = (e: KeyboardEvent) => {
     if (e.keyCode === 27) {
@@ -51,7 +51,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
             <button onClick={() => changeTodoTitle(td.id)}>ok</button>
           </div>
         ) : (
-            <span style={td.completed ? {color: '#78CFB0'} : {color: '##9E78CF'}}>{td.title}</span>
+            <span style={td.isDone ? {color: '#78CFB0'} : {color: '#9E78CF'}}>{td.title}</span>
           
         )}
       </div>

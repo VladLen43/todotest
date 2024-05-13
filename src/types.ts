@@ -5,7 +5,7 @@ export type todosList = {
 export type todoType = {
     id: string;
     title: string;
-    completed: boolean;
+    isDone: boolean;
 }
 
 export type UserType = { 

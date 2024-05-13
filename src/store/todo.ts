@@ -1,23 +1,26 @@
 import { makeAutoObservable } from "mobx"
 import { todoType } from "../types"
+import { toJS } from "mobx"
 
 class Todo {
 
-    todos = JSON.parse(localStorage.getItem('todos')||'[]')
+    todos : todoType[] = []
 
-    completedTodos = JSON.parse(localStorage.getItem('compTodos')||'[]') 
 
     constructor() {
         makeAutoObservable(this)
     }
 
+    getTodos(todos: any) {
+        this.todos = todos
+
+    }
+
     addTodo(newTodo: todoType) {
-       if(this.todos.find((todo: todoType) => todo.title === todo.title)){
-           alert('todo already added')
-       } else {
+      
             this.todos.push(newTodo);
             localStorage.setItem("todos", JSON.stringify(this.todos));
-       }
+
     }
 
     removeTodo(id: string) {
@@ -27,8 +30,9 @@ class Todo {
     
     editTodo(id: string, key: string, value: string | boolean) {
 
-        this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo)
 
+        this.todos = toJS(this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo))
+        localStorage.setItem('todos', JSON.stringify(this.todos))
     }
 }
 export default new Todo()

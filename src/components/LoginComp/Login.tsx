@@ -4,19 +4,12 @@ import users from '../../store/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { when } from 'mobx';
 import styles from './Login.module.scss'
-import { UserType } from '../../types';
 
 export const Login = observer(() => {
 
     const [ username, setUsername] = useState('');
     const [ password, setPassword] = useState('');
 
-    
-    const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const localUser : UserType = localUsers.filter((user: UserType) => user.username === username);
-    const id = localUser.id;
-    
-    console.log(id)
 
     const  navigate = useNavigate()
 

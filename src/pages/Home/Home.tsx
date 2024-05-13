@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
@@ -13,6 +13,12 @@ import { todoType } from '../../types'
 
 export const Home = observer(() => {
 
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos') || '[]')
+    TodoStore.getTodos(todos)
+  },[])
+
     const navigate = useNavigate()
 
     useEffect(() => {   
@@ -25,17 +31,18 @@ export const Home = observer(() => {
   
     },[])
 
-
-  const doneTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === true)
-  const uncompletedTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === false)
+     
+      const doneTodos: todoType[] = useMemo(() =>  TodoStore.todos.filter(todo => todo.isDone),[TodoStore.todos])
+      const unDoneTodos : todoType[] =  useMemo(() => TodoStore.todos.filter(todo => !todo.isDone),[TodoStore.todos])
+      
 
   return (
     <div className={styles.main}>
         <TodoAdd />
-        <h3>Task to do - {TodoStore.todos.length}</h3>
+        <h3>Task to do - {unDoneTodos.length}</h3>
         <div className={styles.list}>
             {
-                uncompletedTodos.map((td :todoType) =>(
+                unDoneTodos.map((td :todoType) =>(
               
                   <Todo td = {td} />
                 ) )

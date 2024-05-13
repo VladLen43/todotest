@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import users from '../../store/auth'
-import { UserType } from '../../types'
 import { when } from 'mobx'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Register.module.scss'
@@ -21,7 +20,7 @@ export const RegisterPage = () => {
                 password: password,
                 access: true,
             }
-            console.log(user)
+          
             navigate('/login')
 
             users.addUser(user)

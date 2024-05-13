@@ -12,28 +12,23 @@ export const Header:React.FC = () => {
 
   const user = JSON.parse(localStorage.getItem('user')|| '[]')
 
+  const handleClickOutside = (event : any) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsHide(false);
+    }
+}
 
 useEffect(() => {
-    const handleClickOutside = (event : any) => {
-    
-      if (ref.current && !ref.current.contains(event.target)) {
-        setIsHide(false);
-      }
-  }
-        document.addEventListener('click', handleClickOutside);
-
-  return () => {
-    
-          document.removeEventListener('click', handleClickOutside);
-  };
-
+    document.addEventListener('click', handleClickOutside);
+  return () =>   
+    document.removeEventListener('click', handleClickOutside);
   },[])
  
   return (
 
     <div ref={ref} className={styles.container} >
-        <div className={styles.buttons} onClick={(e) => e.stopPropagation()} >
-                <button className={styles.parent_button} onClick={() => {setIsHide(!isHide)}}>
+        <div className={styles.buttons}>
+                <button className={styles.parent_button} onClick={() => setIsHide(!isHide)}>
                     <AccountIcon />
                 </button>
          
