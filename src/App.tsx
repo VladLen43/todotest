@@ -6,6 +6,7 @@ import { Login } from './components/LoginComp/Login';
 import { RegisterPage } from './components/Register/Register';
 
 function App() {
+  
   return (
     <div className={styles.container}>
         <Routes>

@@ -41,7 +41,7 @@ export const Home = observer(() => {
         </div>
         <div className={styles.list_done}>
             <h3>Done - {doneTodos.length}</h3>
-            {
+              {
                 doneTodos.map((t,index) => (
                     <div className={styles.done} key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
                 ))

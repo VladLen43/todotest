@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Main.module.scss'
 import users from '../../store/auth'
 import { when } from 'mobx'
@@ -9,8 +9,9 @@ export const Main = ({children} : any) => {
 
 
   return (
+
     <div className={styles.container}>
-      <Header />
+        <Header/>
        { children }
     </div>
   )
