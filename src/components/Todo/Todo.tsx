@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from "react";
-import todo from "../../store/todo";
+import { useState, useEffect } from "react";
+import todos from "../../store/todo";
 import styles from "./Todo.module.scss";
 import { AcceptSvg } from "./AcceptSvg";
 import { TrashCanSvg } from "./TrashCanSvg";
-import { Link } from "react-router-dom";
+import { todoType } from "../../types";
 
-type TodoProps = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+interface ITodo{
+  td: todoType
+}
 
-export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
+export const Todo = ({td}: ITodo): JSX.Element => {
+
   const [isEditing, setIsEditing] = useState(false);
-  const [changedTitle, setChangedTitle] = useState("");
+  const [newTitle, setNewTitle] = useState("");
 
-  const changeTodos = (id: string, title: string) => {
-    todo.changeTodo(id, title);
-    setIsEditing(!isEditing);
+  const changeTodoTitle = (id: string) => {
+    if(newTitle.length !== 0){
+      todos.editTodo(id, 'title', newTitle) 
+    }
+ 
   };
+
+  const changeTodoStatus = (id: string) => {
+    todos.editTodo(id, 'completed', td.completed)
+  }
   const back = (e: KeyboardEvent) => {
     if (e.keyCode === 27) {
       setIsEditing(false);
@@ -34,26 +39,26 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
   }, []);
 
   return (
-    <div className={styles.todo_container} key={id}>
+    <div className={styles.todo_container} key={td.id}>
       <div onDoubleClick={() => setIsEditing(!isEditing)}>
         {isEditing ? (
           <div  className={styles.edit_todo}>
             <input
               type="text"
-              value={changedTitle}
-              onChange={(e) => setChangedTitle(e.target.value)}
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
             />
-            <button onClick={() => changeTodos(id, changedTitle)}>ok</button>
+            <button onClick={() => changeTodoTitle(td.id)}>ok</button>
           </div>
         ) : (
-            <span style={completed ? {color: '#78CFB0'} : {color: '##9E78CF'}}>{title}</span>
+            <span style={td.completed ? {color: '#78CFB0'} : {color: '##9E78CF'}}>{td.title}</span>
           
         )}
       </div>
     <div className={styles.buttons}>
       <div
         className={styles.todo_complete}
-        onClick={() => todo.completeTodo(id)}    
+        onClick={() => changeTodoStatus(td.id)}    
       >
            <AcceptSvg />  
         
@@ -61,7 +66,7 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
       
       <div
         className={styles.delete_button}
-        onClick={() => todo.removeTodo(id)}
+        onClick={() => todos.removeTodo(td.id)}
       >
        <TrashCanSvg />
       </div>

@@ -12,8 +12,6 @@ export const Header:React.FC = () => {
 
   const user = JSON.parse(localStorage.getItem('user')|| '[]')
 
-  console.log(user)
-
 
 useEffect(() => {
     const handleClickOutside = (event : any) => {

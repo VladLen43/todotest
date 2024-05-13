@@ -11,11 +11,11 @@ class Todo {
         makeAutoObservable(this)
     }
 
-    addTodo(todoshka: todoType) {
-       if(this.todos.find((todo: todoType) => todo.title === todoshka.title)){
+    addTodo(newTodo: todoType) {
+       if(this.todos.find((todo: todoType) => todo.title === todo.title)){
            alert('todo already added')
        } else {
-            this.todos.push(todoshka);
+            this.todos.push(newTodo);
             localStorage.setItem("todos", JSON.stringify(this.todos));
        }
     }
@@ -24,18 +24,11 @@ class Todo {
         this.todos = this.todos.filter((todo : todoType) => todo.id !== id)
         localStorage.setItem('todos', JSON.stringify(this.todos));
     }
-
-    completeTodo(id: string) {
-        this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, completed : !todo.completed} : todo)
-        localStorage.setItem("todos", JSON.stringify(this.todos));
-    }
     
-    changeTodo(id: string, title: string) {
-        if(title.length > 0 ) {
-            this.todos = this.todos.map((todo: todoType) => todo.id === id ? {...todo, title : title} : todo)
-        } else {
-            this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, title : todo.title} : todo)
-        }
+    editTodo(id: string, key: string, value: string | boolean) {
+
+        this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo)
+
     }
 }
 export default new Todo()

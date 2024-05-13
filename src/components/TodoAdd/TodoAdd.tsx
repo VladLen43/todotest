@@ -7,10 +7,6 @@ export const TodoAdd = observer(() => {
 
     const [inputText, setInputText] = React.useState('')
 
-    useEffect(() => {
-      
-      
-    },[inputText])
 
     const todoAdd = () => {
        const td = {
