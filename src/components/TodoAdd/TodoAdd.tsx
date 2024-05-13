@@ -10,11 +10,6 @@ export const TodoAdd = observer(() => {
     const user = JSON.parse(localStorage.getItem('user') || '{}') 
 
 
-    useEffect(() => {
-      
-      
-    },[inputText])
-
     const todoAdd = () => {
        const td = {
         title: inputText,
