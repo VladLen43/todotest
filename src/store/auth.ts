@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx"
 import { UserType } from "../types"
-import axios from "axios"
+import axios from '../axios'
 
 
 
@@ -24,20 +24,12 @@ class Auth {
 
 
     async loginUser(userData: UserType) {
-        // Через localstorage
-        // if(this.users.find((user : UserType) => user.username === userData.username)) {
-        //     this.user.access = true;
-        //      localStorage.setItem("user", JSON.stringify(userData));
-        //
-        // }
-        //     else {
-        //     alert("User not found")
-        // }
+     
+        
+        const  { data }  = await axios.post('/auth/login', userData)    
 
-        // backend
-        const  { data }  = await axios.post('http://localhost:4444/auth/login', userData)    
-
-        localStorage.setItem("token", JSON.stringify(data.token))
+        localStorage.setItem("token",data.token)
+        localStorage.setItem("user", JSON.stringify(data))
         this.user.access = true
        
     
@@ -51,19 +43,12 @@ class Auth {
      
     async addUser (params :any)  {
          
-        const { data } = await axios.post('http://localhost:4444/auth/register', params)
+        const { data } = await axios.post('/auth/register', params)
 
-        localStorage.setItem("token", JSON.stringify(data.token))
-        this.user.access = true;
-        this.user.fullName = data.fullName;
 
         return data
            
         }
-    
-    removeUser(username : string) {
-        
-    }
   
 }
 export default new Auth()

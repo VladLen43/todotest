@@ -1,40 +1,88 @@
 import { makeAutoObservable } from "mobx"
-import { todoType } from "../types"
+import { todoType} from "../types"
+import axios from '../axios'
+import { configure } from "mobx"
+import { toJS } from 'mobx'
+
+
+configure({
+    enforceActions: "never",
+})
 
 class Todo {
 
-    todos = JSON.parse(localStorage.getItem('todos')||'[]')
 
-    completedTodos = JSON.parse(localStorage.getItem('compTodos')||'[]') 
+    todos : todoType[] = toJS([])
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    addTodo(todoshka: todoType) {
-       if(this.todos.find((todo: todoType) => todo.title === todoshka.title)){
-           alert('todo already added')
-       } else {
-            this.todos.push(todoshka);
-            localStorage.setItem("todos", JSON.stringify(this.todos));
-       }
+
+    async getTodos(user : any) {
+
+        const userID  = {
+            userId: user
+        }
+        
+        const { data } = await axios.post(`/todos/user`, userID)
+
+        this.todos = data         
+    
     }
 
-    removeTodo(id: string) {
-        this.todos = this.todos.filter((todo : todoType) => todo.id !== id)
-        localStorage.setItem('todos', JSON.stringify(this.todos));
+    async addTodo(todo: any) {
+
+
+        try {
+            const acceptableTodo = {
+                _id: Date.now().toString(),
+                title: todo.title,
+                completed: todo.completed,
+                user: todo.userId
+            }
+
+            this.todos.push(acceptableTodo)
+
+            await axios.post('/todos', todo)
+    
+        }
+         catch(err) {
+            console.log(err)
+         }
+       
     }
 
-    completeTodo(id: string) {
-        this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, completed : !todo.completed} : todo)
-        localStorage.setItem("todos", JSON.stringify(this.todos));
+    async removeTodo(id: string) {
+        try {
+            this.todos = this.todos.filter((todo) => todo._id !== id)
+
+            await  axios.delete(`/todos/${id}`)
+
+        } catch (err) {
+            console.log(err)
+        }
+       
+
     }
+    
+     async completeTodo(td : { _id: string, completed: boolean}) {
+        try {
+            this.todos = this.todos.map((todo: todoType) => todo._id === td._id ? {...todo, completed : td.completed} : todo)
+            const { data } = await axios.patch(`/todos/${td._id}`, td)
+
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    
     
     changeTodo(id: string, title: string) {
         if(title.length > 0 ) {
-            this.todos = this.todos.map((todo: todoType) => todo.id === id ? {...todo, title : title} : todo)
+            this.todos = this.todos.map((todo: todoType) => todo._id === id ? {...todo, title : title} : todo)
         } else {
-            this.todos = this.todos.map((todo : todoType) => todo.id === id ? {...todo, title : todo.title} : todo)
+            this.todos = this.todos.map((todo : todoType) => todo._id === id ? {...todo, title : todo.title} : todo)
         }
     }
 }

@@ -3,7 +3,7 @@ export type todosList = {
 }
 
 export type todoType = {
-    id: string;
+    _id: string;
     title: string;
     completed: boolean;
     user: string;

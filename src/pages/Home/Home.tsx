@@ -10,10 +10,20 @@ import { when } from 'mobx'
 import { todoType } from '../../types'
 
 
-
 export const Home = observer(() => {
 
+  useEffect(() => {
+
+       TodoStore.getTodos(user._id)
+  
+  },[])
+
     const navigate = useNavigate()
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}') 
+    console.log(user._id)
+
+  
 
     useEffect(() => {   
         when(
@@ -25,22 +35,20 @@ export const Home = observer(() => {
   
     },[])
 
-  const user = JSON.parse(localStorage.getItem('user') || '{}') 
-  console.log(user)
 
-  const UserTodos = TodoStore.todos.filter((todo : todoType) => todo.user === user.username)
-
-  const doneTodos = UserTodos.filter((todo: todoType) => todo.completed === true)
+    const doneTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === true)
+    const uncompletedTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === false)
+  
 
   return (
     <div className={styles.main}>
         <TodoAdd />
-        <h3>Task to do - {UserTodos.length}</h3>
+        <h3>Task to do - {uncompletedTodos.length}</h3>
         <div className={styles.list}>
             {
-                UserTodos.map((td: todoType) =>(
+                TodoStore.todos.map((td: todoType) =>(
 
-                    <div key={td.id}>{td.completed === false ? <Todo id ={td.id} title={td.title} completed={td.completed} /> : <div></div> } </div>
+                    <div key={td._id}>{td.completed === false ? <Todo id ={td._id} title={td.title} completed={td.completed} /> : <div></div> } </div>
                 ) )
             }
         </div>
@@ -49,10 +57,10 @@ export const Home = observer(() => {
               {
                 doneTodos.map((t: todoType) => (
 
-                    <div className={styles.done} key={t.id}>
+                    <div className={styles.done} key={t._id}>
                       {
                         t.completed === true 
-                            ? <Todo id ={t.id} title={t.title} completed={t.completed} /> 
+                            ? <Todo id ={t._id} title={t.title} completed={t.completed} /> 
                             : <div></div> 
                       }
                     </div>

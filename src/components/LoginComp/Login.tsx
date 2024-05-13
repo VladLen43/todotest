@@ -4,7 +4,6 @@ import users from '../../store/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { when } from 'mobx';
 import styles from './Login.module.scss'
-import { UserType } from '../../types';
 
 export const Login = observer(() => {
 

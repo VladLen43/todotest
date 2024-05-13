@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import users from '../../store/auth'
-import { UserType } from '../../types'
-import { when } from 'mobx'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Register.module.scss'
 
