@@ -3,18 +3,17 @@ import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
 import {observer} from 'mobx-react-lite'
-import todo from '../../store/todo'
 import users from '../../store/auth'
-import { todoType } from '../../types'
 import { Todo } from '../../components/Todo/Todo'
 import { Link, useNavigate } from 'react-router-dom'
 import { when } from 'mobx'
 
 
 
+
 export const Home = observer(() => {
 
-    const [isAuth, setIsAuth] = useState(true)
+    const [isAuth, setIsAuth] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {   
@@ -22,18 +21,11 @@ export const Home = observer(() => {
             () => users.access === false,
             () => {
             navigate('/login')
-    }
-  );
+        }
+    );
   
-},[])
+    },[])
 
-    const logout = () => {
-        setIsAuth(false)
-    }
-
-
-
-    
 
     const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 

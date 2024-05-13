@@ -1,8 +1,9 @@
 import {observer} from 'mobx-react-lite'
 import { useEffect, useState } from "react";
-import users from '../../store/auth'
-import { useNavigate } from 'react-router-dom';
+import users from '../../store/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { when } from 'mobx';
+import styles from './Login.module.scss'
 
 export const Login = observer(() => {
 
@@ -24,6 +25,8 @@ export const Login = observer(() => {
             alert('Веедите данные пользователя')
         }
     }
+
+  
     useEffect(() => {   
         when(
             () => users.access === true,
@@ -34,10 +37,11 @@ export const Login = observer(() => {
     },[])
     
   return (
-    <div>
+    <div className={styles.container}>
             <input type='text' placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
             <input type='text' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}  />
-            <button onClick={() => onSubmit()}>Send</button>
+            <button onClick={() => onSubmit()}>Login</button>
+            <Link to='/register'>Зарегестироваться</Link>
     </div>
   )
 })

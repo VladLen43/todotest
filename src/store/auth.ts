@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx"
-import {  UserType } from "../types"
-
-
+import { UserType } from "../types"
 
 
 class Auth {
+
+    users = JSON.parse(localStorage.getItem("users") || "[]")
 
     user = localStorage.getItem("user")
 
@@ -13,18 +13,30 @@ class Auth {
     constructor() {
         makeAutoObservable(this)
     }
-    loginUser(user: UserType) {
-        // Временное решения (TODO: добавить базу юзеров)
-        if(user.username === "vlad" && user.password === "1234") {
+    loginUser(userData: UserType) {
 
-        this.access = true;
+        if(this.users.find((user : UserType) => user.id === userData.id)) {
+            this.access = true;
+            localStorage.setItem("user", JSON.stringify(userData));
+    
+    }
+    else {
+        alert("User not found")
     }
    
     }
     removeUser() {
         this.access = false;
+        localStorage.removeItem("user")
     }
 
-  
+    addUser(userData: UserType) {
+        if(this.users.find((user : UserType) => user.id !== userData.id)){
+            this.users.push(userData)
+            localStorage.setItem("users", JSON.stringify(userData))
+        }
+    }
+    
+
 }
 export default new Auth()

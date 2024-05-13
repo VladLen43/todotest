@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+
+            button{
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                color: white;
+                background-color:#9E78CF;
+                transition: all 0.5s ease-in-out;
+        }
+        
+
+        .open{
+            opacity: 1;
+        }
+        .close {
+            opacity: 0;
+            background-color: transparent;;
+
+        }
+    }
+}
