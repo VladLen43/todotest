@@ -4,15 +4,24 @@ import users from '../../store/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { when } from 'mobx';
 import styles from './Login.module.scss'
+import { UserType } from '../../types';
 
 export const Login = observer(() => {
 
     const [ username, setUsername] = useState('');
-    const [ password, setPassword] = useState('')
+    const [ password, setPassword] = useState('');
+
+    
+    const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const localUser : UserType = localUsers.filter((user: UserType) => user.username === username);
+    const id = localUser.id;
+       
+
     const  navigate = useNavigate()
 
     const onSubmit = () => {
         if(username.length > 0 || password.length > 0) {
+            
             const user = {
                 id: Date.now().toString(),
                 username: username,
@@ -20,9 +29,10 @@ export const Login = observer(() => {
                 access: !users.access,
             } 
             users.loginUser(user)
+            console.log(user)
         }
         else {
-            alert('Веедите данные пользователя')
+            alert('Введите данные пользователя')
         }
     }
 

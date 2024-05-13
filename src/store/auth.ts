@@ -13,16 +13,18 @@ class Auth {
     constructor() {
         makeAutoObservable(this)
     }
-    loginUser(userData: UserType) {
 
+
+    loginUser(userData: UserType) {
+        
         if(this.users.find((user : UserType) => user.id === userData.id)) {
             this.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
-    }
-    else {
-        alert("User not found")
-    }
+        }
+            else {
+            alert("User not found")
+        }
    
     }
     removeUser() {
@@ -36,6 +38,8 @@ class Auth {
             localStorage.setItem("users", JSON.stringify(userData))
         }
     }
+
+    
     
 
 }

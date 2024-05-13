@@ -4,20 +4,28 @@
     justify-content: flex-end;
     align-items: center;
     height: 50px;
+    background-color: #1D1825;
+    overflow-y: visible;
 
     .buttons {
         display: flex;
         flex-direction: column;
-        margin-top: 30px;
+
+            .parent_button {
+                margin-top: 68px;
+                cursor: pointer;
+            }
+
 
             button{
                 cursor: pointer;
                 padding: 10px;
-                border-radius: 10px;
                 border: none;
                 color: white;
                 background-color:#9E78CF;
                 transition: all 0.5s ease-in-out;
+                
+        
         }
         
 
@@ -26,7 +34,7 @@
         }
         .close {
             opacity: 0;
-            background-color: transparent;;
+            background-color: transparent;
 
         }
     }
