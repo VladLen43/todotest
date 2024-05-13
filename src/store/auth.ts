@@ -1,24 +1,14 @@
 import { makeAutoObservable } from "mobx"
-import { UserList, UserType } from "../types"
-import axios from 'axios'
-import { useEffect, useState } from "react";
-import { access } from "fs";
-
-
-const user = localStorage.getItem("user") ? true : false;
+import { UserType } from "../types"
 
 
 class Auth {
 
+    users = JSON.parse(localStorage.getItem("users") || "[]")
 
-    users = JSON.parse(localStorage.getItem('users')||'[]')
+    user = localStorage.getItem("user")
 
-    user: UserType = {
-            "id": "",
-            "username": "",
-            "password":   "",
-            "access": user,
-        }
+    access = this.user ? true : false
 
     constructor() {
         makeAutoObservable(this)
@@ -27,8 +17,8 @@ class Auth {
 
     loginUser(userData: UserType) {
         
-        if(this.users.id === userData.id) {
-            this.user.access = true;
+        if(this.users.find((user : UserType) => user.id === userData.id)) {
+            this.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
         }
@@ -37,27 +27,20 @@ class Auth {
         }
    
     }
-    logoutUser() {
-        this.user.access = false;
-        console.log(this.user.access)
+    removeUser() {
+        this.access = false;
         localStorage.removeItem("user")
     }
 
     addUser(userData: UserType) {
-        this.users.push(userData);
-        localStorage.setItem("users", JSON.stringify(this.users));
- 
-    }
-    removeUser() {
-        localStorage.removeItem('users')
-        this.user.access = false;
+        if(this.users.find((user : UserType) => user.id !== userData.id)){
+            this.users.push(userData)
+            localStorage.setItem("users", JSON.stringify(userData))
+        }
     }
 
     
     
-    // loginUser(id: string) {
-    //     this.user = this.user.map(user => user.id === id ? {...user, access : !user.access} : user)
-    // }
-  
+
 }
 export default new Auth()

@@ -13,8 +13,8 @@ export const Header = () => {
                 <button className={styles.parent_button} onClick={() => setHide(!hide)}>
                     <AccountIcon />
                 </button>
-            <button className={hide ? styles.close : styles.open} onClick={() => users.logoutUser()}>Выйти</button>
-            <button className={hide ? styles.close : styles.open} onClick={() => users.removeUser()}>Удалить пользователя</button>
+            <button className={hide ? styles.close : styles.open} onClick={() => users.removeUser()}>Выйти</button>
+
         </div>
     </div>
   )
