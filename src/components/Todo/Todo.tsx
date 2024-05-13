@@ -14,33 +14,47 @@ export const Todo = ({td}: ITodo): JSX.Element => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
-  const changeTodoTitle = (id: string) => {
+  const changeTodoTitle = () => {
     if(newTitle.length > 0){
-      todos.editTodo(id, 'title', newTitle) 
+      todos.editTodo(td.id, 'title', newTitle) 
+      setNewTitle('')
+      setIsEditing(false)
     }
  
   };
 
-  const changeTodoStatus = (id: string) => {
-    todos.editTodo(id, 'completed', !td.isDone)
+  const handleSetEdit = () => {
+    if(isEditing) return
+    setIsEditing(true)
+    setNewTitle(td.title)
   }
-  const back = (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
+
+  const changeTodoStatus = (id: string) => {
+    todos.editTodo(id, 'isDone', !td.isDone)
+  }
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    console.log('key', e.key)
+    if (e.key === 'Escape' ) {
       setIsEditing(false);
+      setNewTitle('')
+    }
+    if(e.key === 'Enter' && isEditing){
+      changeTodoTitle()
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", back, true);
+    document.addEventListener("keydown", onKeyDown, true);
 
     return () => {
-      document.removeEventListener("keydown", back, false);
+      document.removeEventListener("keydown", onKeyDown, false);
     };
   }, []);
 
   return (
     <div className={styles.todo_container} key={td.id}>
-      <div onDoubleClick={() => setIsEditing(!isEditing)}>
+      <div onDoubleClick={handleSetEdit}>
         {isEditing ? (
           <div  className={styles.edit_todo}>
             <input
@@ -48,7 +62,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
             />
-            <button onClick={() => changeTodoTitle(td.id)}>ok</button>
+            <button onClick={changeTodoTitle}>ok</button>
           </div>
         ) : (
             <span style={td.isDone ? {color: '#78CFB0'} : {color: '#9E78CF'}}>{td.title}</span>

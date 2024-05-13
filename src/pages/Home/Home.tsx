@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
@@ -12,7 +12,6 @@ import { todoType } from '../../types'
 
 
 export const Home = observer(() => {
-
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos') || '[]')
@@ -43,7 +42,7 @@ export const Home = observer(() => {
         <div className={styles.list}>
             {
                 unDoneTodos.map((td :todoType) =>(
-              
+                  
                   <Todo td = {td} />
                 ) )
             }
@@ -52,7 +51,7 @@ export const Home = observer(() => {
             <h3>Done - {doneTodos.length}</h3>
               {
                 doneTodos.map((td: todoType) => (
-
+                  
                             <Todo td={td} /> 
 
                 ))

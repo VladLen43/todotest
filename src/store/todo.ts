@@ -2,14 +2,19 @@ import { makeAutoObservable } from "mobx"
 import { todoType } from "../types"
 import { toJS } from "mobx"
 
+
 class Todo {
 
     todos : todoType[] = []
+
+    todoId = ''
+
 
 
     constructor() {
         makeAutoObservable(this)
     }
+    
 
     getTodos(todos: any) {
         this.todos = todos
@@ -18,8 +23,8 @@ class Todo {
 
     addTodo(newTodo: todoType) {
       
-            this.todos.push(newTodo);
-            localStorage.setItem("todos", JSON.stringify(this.todos));
+        this.todos = [...this.todos, newTodo]
+        localStorage.setItem("todos", JSON.stringify(this.todos));
 
     }
 
@@ -29,7 +34,6 @@ class Todo {
     }
     
     editTodo(id: string, key: string, value: string | boolean) {
-
 
         this.todos = toJS(this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo))
         localStorage.setItem('todos', JSON.stringify(this.todos))
