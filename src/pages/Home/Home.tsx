@@ -53,7 +53,7 @@ export const Home = observer(() => {
                       }
                     </div>
                 ))
-              }
+            }
         </div>
     </div>
   )

@@ -38,14 +38,6 @@ class Auth {
             localStorage.setItem("users", JSON.stringify(userData))
         }
     }
-    removeUser(username : string) {
-        this.users = this.users.filter((user : UserType) => user.username !== username)
-        localStorage.setItem('users', JSON.stringify(this.users));
-        this.access = false;
-    }
-
-    
-    
 
 }
 export default new Auth()
