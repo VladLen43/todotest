@@ -13,9 +13,9 @@ class Auth {
     constructor() {
         makeAutoObservable(this)
     }
-    loginUser(users: UserType) {
+    loginUser(user: UserType) {
         // Временное решения (TODO: добавить базу юзеров)
-        if(users.username === "vlad" && users.password === "1234") {
+        if(user.username === "vlad" && user.password === "1234") {
 
         this.access = true;
     }
