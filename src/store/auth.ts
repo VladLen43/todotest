@@ -2,20 +2,20 @@ import { makeAutoObservable } from "mobx"
 import { UserType } from "../types"
 
 
-const user = localStorage.getItem("user") ? true : false;
-
 class Auth {
 
     users = JSON.parse(localStorage.getItem("users") || "[]")
 
-    access = user ? true : false
+    user = localStorage.getItem("user")
+
+    access = this.user ? true : false
 
     constructor() {
         makeAutoObservable(this)
     }
     loginUser(userData: UserType) {
 
-        if(this.users.find((user : UserType) => user.username === userData.username)) {
+        if(this.users.find((user : UserType) => user.id === userData.id)) {
             this.access = true;
             localStorage.setItem("user", JSON.stringify(userData));
     
@@ -27,13 +27,14 @@ class Auth {
     }
     removeUser() {
         this.access = false;
-        console.log(this.access)
         localStorage.removeItem("user")
     }
 
     addUser(userData: UserType) {
-        if(this.users.find((user : UserType) => user.username !== userData.username))
-        this.users.push(userData)
+        if(this.users.find((user : UserType) => user.id !== userData.id)){
+            this.users.push(userData)
+            localStorage.setItem("users", JSON.stringify(userData))
+        }
     }
     
 

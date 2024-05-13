@@ -14,7 +14,7 @@ export const Login = observer(() => {
     const onSubmit = () => {
         if(username.length > 0 || password.length > 0) {
             const user = {
-                id: "1",
+                id: Date.now().toString(),
                 username: username,
                 password: password,
                 access: !users.access,
