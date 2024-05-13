@@ -23,10 +23,10 @@ export const Login = observer(() => {
         if(username.length > 0 || password.length > 0) {
             
             const user = {
-                id: id,
+                id: Date.now().toString(),
                 username: username,
                 password: password,
-                access: !users.user.access,
+                access: !users.access,
             } 
             users.loginUser(user)
 
@@ -36,9 +36,10 @@ export const Login = observer(() => {
         }
     }
 
+  
     useEffect(() => {   
         when(
-            () => users.user.access === true,
+            () => users.access === true,
             () => {
             navigate('/')
         }

@@ -29,7 +29,7 @@ export const RegisterPage = () => {
   
         useEffect(() => {   
             when(
-                () => users.user.access === true,
+                () => users.access === true,
                 () => {
                 navigate('/')
             }
@@ -41,7 +41,7 @@ export const RegisterPage = () => {
   return (
     <div>
         <input type="text" placeholder='Select your name' value={userName} onChange={(e) => setUserName(e.target.value)} />
-        <input type="text" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
         <button onClick={() => onSubmit()}>Зарегестироваться</button>
     </div>
   )

@@ -16,7 +16,7 @@ export const Home = observer(() => {
 
     useEffect(() => {   
         when(
-            () => users.user.access === false,
+            () => users.access === false,
             () => {
             navigate('/login')
         }
@@ -25,7 +25,7 @@ export const Home = observer(() => {
     },[])
 
 
-  const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
+    const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
 
   return (
     <div className={styles.main}>
@@ -54,7 +54,6 @@ export const Home = observer(() => {
                 ))
               }
         </div>
-
     </div>
   )
 })

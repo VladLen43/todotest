@@ -37,8 +37,7 @@ useEffect(() => {
          
                 <div id={styles.opened_buttons} className={hide ? styles.open : styles.close}>
 
-                      <button onClick={() => users.logoutUser()}>Выйти</button>
-                      <button onClick={() => users.removeUser()}>Удалить пользователя</button>
+                      <button onClick={() => users.removeUser()}>Выйти</button>
 
                 </div>
         
