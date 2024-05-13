@@ -27,7 +27,7 @@ class Auth {
         }
    
     }
-    removeUser() {
+    logoutUser() {
         this.access = false;
         localStorage.removeItem("user")
     }
@@ -38,10 +38,6 @@ class Auth {
             localStorage.setItem("users", JSON.stringify(userData))
         }
     }
-
-
-    
-    
 
 }
 export default new Auth()

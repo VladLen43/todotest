@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import users from '../../store/auth'
-import { UserType } from '../../types'
 import { when } from 'mobx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import styles from './Register.module.scss'
 
 
 export const RegisterPage = () => {
@@ -20,7 +20,7 @@ export const RegisterPage = () => {
                 password: password,
                 access: true,
             }
-            console.log(user)
+          
             navigate('/login')
 
             users.addUser(user)
@@ -39,10 +39,15 @@ export const RegisterPage = () => {
 
     
   return (
-    <div>
+    <div className={styles.container}>
+
         <input type="text" placeholder='Select your name' value={userName} onChange={(e) => setUserName(e.target.value)} />
-        <input type="password" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={() => onSubmit()}>Зарегестироваться</button>
+
+        <input type="text" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
+
+        <button onClick={() => onSubmit()}>Register</button>
+
+        <Link className={styles.log_link} to='/login'>Login</Link>
     </div>
   )
 }

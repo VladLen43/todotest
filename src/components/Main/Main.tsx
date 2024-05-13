@@ -1,8 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
 import styles from './Main.module.scss'
-import users from '../../store/auth'
-import { when } from 'mobx'
-import { useNavigate } from 'react-router-dom'
 import { Header } from '../Header/Header'
 
 export const Main = ({children} : any) => { 

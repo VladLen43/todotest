@@ -1,32 +1,42 @@
 import { makeAutoObservable } from "mobx"
-import { todoType, todosList } from "../types"
+import { todoType } from "../types"
+import { toJS } from "mobx"
+
 
 class Todo {
 
-    todos = [
-        {id: '1', title: 'some title', completed: false},
-        {id: '2', title: 'some title2', completed: false},
-        {id: '3', title: 'some title3', completed: false}
-    ]
+    todos : todoType[] = []
+
+    todoId = ''
+
+
 
     constructor() {
         makeAutoObservable(this)
     }
-    addTodo(todo: todoType) {
-        this.todos.push(todo)
+    
+
+    getTodos(todos: any) {
+        this.todos = todos
+
     }
+
+    addTodo(newTodo: todoType) {
+      
+        this.todos = [...this.todos, newTodo]
+        localStorage.setItem("todos", JSON.stringify(this.todos));
+
+    }
+
     removeTodo(id: string) {
-        this.todos = this.todos.filter(todo => todo.id !== id)
+        this.todos = this.todos.filter((todo : todoType) => todo.id !== id)
+        localStorage.setItem('todos', JSON.stringify(this.todos));
     }
-    completeTodo(id: string) {
-        this.todos = this.todos.map(todo => todo.id === id ? {...todo, completed : !todo.completed} : todo)
-    }
-    changeTodo(id: string, title: string) {
-        if(title.length > 0) {
-            this.todos = this.todos.map(todo => todo.id === id ? {...todo, title : title} : todo)
-        } else {
-            this.todos = this.todos.map(todo => todo.id === id ? {...todo, title : todo.title} : todo)
-        }
+    
+    editTodo(id: string, key: string, value: string | boolean) {
+
+        this.todos = toJS(this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo))
+        localStorage.setItem('todos', JSON.stringify(this.todos))
     }
 }
 export default new Todo()

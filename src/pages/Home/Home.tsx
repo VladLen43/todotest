@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
@@ -7,10 +7,16 @@ import users from '../../store/auth'
 import { Todo } from '../../components/Todo/Todo'
 import { useNavigate } from 'react-router-dom'
 import { when } from 'mobx'
+import { todoType } from '../../types'
 
 
 
 export const Home = observer(() => {
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos') || '[]')
+    TodoStore.getTodos(todos)
+  },[])
 
     const navigate = useNavigate()
 
@@ -24,26 +30,30 @@ export const Home = observer(() => {
   
     },[])
 
-
-  const doneTodos = TodoStore.todos.filter((todo) => todo.completed === true)
+     
+      const doneTodos: todoType[] = useMemo(() =>  TodoStore.todos.filter(todo => todo.isDone),[TodoStore.todos])
+      const unDoneTodos : todoType[] =  useMemo(() => TodoStore.todos.filter(todo => !todo.isDone),[TodoStore.todos])
+      
 
   return (
     <div className={styles.main}>
         <TodoAdd />
-        <h3>Task to do - {TodoStore.todos.length}</h3>
+        <h3>Task to do - {unDoneTodos.length}</h3>
         <div className={styles.list}>
             {
-                TodoStore.todos.map((td,index) =>(
-
-                    <div key={index}>{td.completed === false ? <Todo id ={td.id} title={td.title} completed={td.completed} /> : <div></div> } </div>
+                unDoneTodos.map((td :todoType) =>(
+                  
+                  <Todo td = {td} />
                 ) )
             }
         </div>
         <div className={styles.list_done}>
             <h3>Done - {doneTodos.length}</h3>
               {
-                doneTodos.map((t,index) => (
-                    <div className={styles.done} key={index}>{t.completed === true ? <Todo id ={t.id} title={t.title} completed={t.completed} /> : <div></div> } </div>
+                doneTodos.map((td: todoType) => (
+                  
+                            <Todo td={td} /> 
+
                 ))
             }
         </div>
