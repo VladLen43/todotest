@@ -1,5 +1,6 @@
-import { makeAutoObservable } from "mobx"
+import { makeObservable, observable } from "mobx"
 import { UserType } from "../types"
+
 
 
 class Auth {
@@ -8,11 +9,12 @@ class Auth {
 
     user?: UserType = undefined
 
-    access = localStorage.getItem('user') ? true : false
  
     constructor() {
-        makeAutoObservable(this)
-    }
+        makeObservable(this, {
+            user: observable,
+        });
+        }
 
     getUsers(users: UserType[]) {
         this.users = users
@@ -26,9 +28,7 @@ class Auth {
       
         if(this.users.find((user : UserType) => user.username === userData.username)) {
             const localUser = this.users.find((user : UserType) => user.username === userData.username)
-            this.access = true;
             localStorage.setItem("user", JSON.stringify(localUser));
-
         }
             else {
             alert("User not found")
@@ -36,8 +36,8 @@ class Auth {
    
     }
     logoutUser() {
+        this.user = undefined
         localStorage.removeItem("user")
-        this.access = false;
     }
 
     addUser(userData: UserType) {

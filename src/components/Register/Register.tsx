@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import users from '../../store/auth'
+import UserStore from '../../store/auth'
 import { when } from 'mobx'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './Register.module.scss'
@@ -22,13 +22,13 @@ export const RegisterPage = () => {
           
             navigate('/login')
 
-            users.addUser(user)
+            UserStore.addUser(user)
     }
     }
   
         useEffect(() => {   
             when(
-                () => users.access === true,
+                () => !!UserStore.user,
                 () => {
                 navigate('/')
             }

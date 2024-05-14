@@ -3,19 +3,30 @@ import { Header } from '../Header/Header'
 import { useEffect } from 'react'
 import UserStore from '../../store/auth'
 import { UserType } from '../../types'
+import { useNavigate } from 'react-router-dom'
 
 export const Main = ({children} : any) => { 
 
+  const navigate = useNavigate()
+
+
   useEffect(() => {
-    const users: UserType[] = JSON.parse(localStorage.getItem('users') || '[]')
-    if(users) {
-      UserStore.getUsers(users)
+
+    const userLSArray = localStorage.getItem('users')
+    const usersArray: UserType[] = userLSArray ? JSON.parse(userLSArray) : undefined
+    const userLS = localStorage.getItem('user')
+    const user: UserType = userLS ? JSON.parse(userLS) : undefined
+    
+    if(usersArray) {
+      UserStore.getUsers(usersArray)
     }
 
-    const user: UserType = JSON.parse(localStorage.getItem('user') || '[]')
     if(user) {
       UserStore.getUser(user)
-    }
+      navigate('/')
+    } else {      
+      navigate('/login')
+    }  
 
   },[])
 

@@ -12,12 +12,6 @@ export const Login = observer(() => {
 
     const  navigate = useNavigate()
 
-    useEffect(() => {
-        if(localStorage.getItem('user')) {
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
-            UserStore.getUser(user)
-        }
-    },[UserStore.user])
 
     const onSubmit = () => {
         
@@ -29,7 +23,7 @@ export const Login = observer(() => {
                 password: password
             } 
             UserStore.loginUser(user)
-
+            navigate('/')
         }
         else {
             alert('Введите данные пользователя')
@@ -37,14 +31,6 @@ export const Login = observer(() => {
     }
 
   
-    useEffect(() => {   
-        when(
-            () => UserStore.access === true,
-            () => {
-            navigate('/')
-        }
-        );
-    },[])
     
   return (
     <div className={styles.container}>

@@ -25,15 +25,15 @@ export const Home = observer(() => {
 
     const navigate = useNavigate()
 
-    useEffect(() => {   
-        when(
-            () => UserStore.access === false,
-            () => {
-            navigate('/login')
-        }
-    );
+    // useEffect(() => {   
+    //     when(
+    //         () => !UserStore.user,
+    //         () => {
+    //         navigate('/login')
+    //     }
+    // );
   
-    },[])
+    // },[UserStore.user])
 
 
      
@@ -41,7 +41,7 @@ export const Home = observer(() => {
       const unDoneTodos : todoType[] =  useMemo(() => TodoStore.todos.filter(todo => !todo.isDone),[TodoStore.todos])
       
 
-      useEffect(() => console.log('kek', unDoneTodos), [unDoneTodos])
+     
 
 
   return (
