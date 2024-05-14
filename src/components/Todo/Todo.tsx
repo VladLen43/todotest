@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import TodoStore from "../../store/todo";
 import styles from "./Todo.module.scss";
-import { AcceptSvg } from "./AcceptSvg";
-import { TrashCanSvg } from "./TrashCanSvg";
+import { TrashIcon } from "../../assets/icons";
+import { AcceptIcon } from "../../assets/icons";
 import { todoType } from "../../types";
 
 interface ITodo{
@@ -74,7 +74,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
         className={styles.todo_complete}
         onClick={() => changeTodoStatus(td.id)}    
       >
-           <AcceptSvg />  
+           <AcceptIcon />  
         
       </div>
       
@@ -82,7 +82,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
         className={styles.delete_button}
         onClick={() => TodoStore.removeTodo(td.id)}
       >
-       <TrashCanSvg />
+       <TrashIcon />
       </div>
     </div>
 </div>

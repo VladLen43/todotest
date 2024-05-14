@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
 import {observer} from 'mobx-react-lite'
 import UserStore from '../../store/auth'
 import { Todo } from '../../components/Todo/Todo'
-import {  useNavigate } from 'react-router-dom'
-import { when } from 'mobx'
 import { todoType } from '../../types'
 
 
@@ -22,19 +20,6 @@ export const Home = observer(() => {
       TodoStore.getTodos(todos.filter((item) => item.userId === UserStore.user?.id))
 
   },[UserStore.user])
-
-    const navigate = useNavigate()
-
-    // useEffect(() => {   
-    //     when(
-    //         () => !UserStore.user,
-    //         () => {
-    //         navigate('/login')
-    //     }
-    // );
-  
-    // },[UserStore.user])
-
 
      
       const doneTodos: todoType[] = useMemo(() =>  TodoStore.todos.filter(todo => todo.isDone),[TodoStore.todos])

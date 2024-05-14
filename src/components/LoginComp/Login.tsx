@@ -1,8 +1,7 @@
 import {observer} from 'mobx-react-lite'
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import UserStore from '../../store/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { when } from 'mobx';
 import styles from './Login.module.scss'
 
 export const Login = observer(() => {

@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState, useMemo, Dispatch, SetStateAction } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import styles from './Header.module.scss'
 import UserStore from '../../store/auth'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import {TrashIcon} from '../../assets/icons/index'
+import { useNavigate } from 'react-router-dom'
+import {AccountIcon} from '../../assets/icons/index'
  
 
 export const Header:React.FC = () => {
 
   const navigate = useNavigate();
-  const location = useLocation()
   const [isHide, setIsHide] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
   
@@ -37,10 +36,12 @@ useEffect(() => {
 
           <div className={styles.account_buttons} style={{display: isLoggedIn ? 'flex' : 'none'}} onClick={() => setIsHide(!isHide)}>
                 <button className={styles.parent_button} >
-                    <TrashIcon />
+                    <AccountIcon />
                 </button>
                   <div className={styles.open_button} >
-                    <button className={isHide ? styles.open : styles.close} onClick={logoutHandler}>Выйти</button>
+                    <button className={isHide ? styles.open : styles.close} onClick={logoutHandler}>
+                        Выйти
+                      </button>
                   </div>
               </div>
           </div>

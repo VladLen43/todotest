@@ -2,7 +2,6 @@ import { makeObservable, observable } from "mobx"
 import { UserType } from "../types"
 
 
-
 class Auth {
 
     users : UserType[] = []
