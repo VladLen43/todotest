@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './TodoAdd.module.scss'
 import {observer} from 'mobx-react-lite'
 import todo from '../../store/todo'
+import UserStore from '../../store/auth'
 
 export const TodoAdd = observer(() => {
 
@@ -10,11 +11,13 @@ export const TodoAdd = observer(() => {
 
     const todoAdd = () => {
 
-      if(inputText.length > 0) {
+      if(inputText.length > 0 && UserStore.user) {
+         const user = JSON.parse(localStorage.getItem('user') || '{}')
          const td = {
             id: Date.now().toString(),
             title: inputText,
-            isDone: false
+            isDone: false,
+            userId: user.id,
            }
 
            todo.addTodo(td)  

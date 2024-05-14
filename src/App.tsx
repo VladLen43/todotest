@@ -9,11 +9,13 @@ function App() {
   
   return (
     <div className={styles.container}>
+      <Main>
         <Routes>
-         <Route path='/' element={ <Main><Home/></Main>} />
+          <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<RegisterPage />} />
         </Routes>
+        </Main>
     </div>
   );
 }

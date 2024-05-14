@@ -9,8 +9,6 @@ class Todo {
 
     todoId = ''
 
-
-
     constructor() {
         makeAutoObservable(this)
     }
@@ -18,14 +16,11 @@ class Todo {
 
     getTodos(todos: any) {
         this.todos = todos
-
     }
 
-    addTodo(newTodo: todoType) {
-      
+    addTodo(newTodo: todoType) {   
         this.todos = [...this.todos, newTodo]
         localStorage.setItem("todos", JSON.stringify(this.todos));
-
     }
 
     removeTodo(id: string) {
@@ -34,7 +29,6 @@ class Todo {
     }
     
     editTodo(id: string, key: string, value: string | boolean) {
-
         this.todos = toJS(this.todos.map((todo : todoType) => todo.id === id ? {...todo, [key] : value} : todo))
         localStorage.setItem('todos', JSON.stringify(this.todos))
     }

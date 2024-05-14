@@ -6,13 +6,13 @@ export type todoType = {
     id: string;
     title: string;
     isDone: boolean;
+    userId: string;
 }
 
 export type UserType = { 
-    "id": string;
-    "username": string;
-    "password": string;
-    "access": boolean;
+    id: string;
+    username: string;
+    password: string;
 }
 
 export type UserList = {

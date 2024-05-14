@@ -3,9 +3,9 @@ import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
 import {observer} from 'mobx-react-lite'
-import users from '../../store/auth'
+import UserStore from '../../store/auth'
 import { Todo } from '../../components/Todo/Todo'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { when } from 'mobx'
 import { todoType } from '../../types'
 
@@ -13,16 +13,21 @@ import { todoType } from '../../types'
 
 export const Home = observer(() => {
 
+
   useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem('todos') || '[]')
-    TodoStore.getTodos(todos)
-  },[])
+      if(!UserStore.user) return
+
+      const todos : todoType[] = JSON.parse(localStorage.getItem('todos') || '[]')
+
+      TodoStore.getTodos(todos.filter((item) => item.userId === UserStore.user?.id))
+
+  },[UserStore.user])
 
     const navigate = useNavigate()
 
     useEffect(() => {   
         when(
-            () => users.access === false,
+            () => UserStore.access === false,
             () => {
             navigate('/login')
         }
@@ -30,10 +35,14 @@ export const Home = observer(() => {
   
     },[])
 
+
      
       const doneTodos: todoType[] = useMemo(() =>  TodoStore.todos.filter(todo => todo.isDone),[TodoStore.todos])
       const unDoneTodos : todoType[] =  useMemo(() => TodoStore.todos.filter(todo => !todo.isDone),[TodoStore.todos])
       
+
+      useEffect(() => console.log('kek', unDoneTodos), [unDoneTodos])
+
 
   return (
     <div className={styles.main}>
@@ -51,7 +60,7 @@ export const Home = observer(() => {
             <h3>Done - {doneTodos.length}</h3>
               {
                 doneTodos.map((td: todoType) => (
-                  
+
                             <Todo td={td} /> 
 
                 ))

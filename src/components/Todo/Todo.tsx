@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import todos from "../../store/todo";
+import TodoStore from "../../store/todo";
 import styles from "./Todo.module.scss";
 import { AcceptSvg } from "./AcceptSvg";
 import { TrashCanSvg } from "./TrashCanSvg";
@@ -16,7 +16,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
 
   const changeTodoTitle = () => {
     if(newTitle.length > 0){
-      todos.editTodo(td.id, 'title', newTitle) 
+      TodoStore.editTodo(td.id, 'title', newTitle) 
       setNewTitle('')
       setIsEditing(false)
     }
@@ -30,11 +30,11 @@ export const Todo = ({td}: ITodo): JSX.Element => {
   }
 
   const changeTodoStatus = (id: string) => {
-    todos.editTodo(id, 'isDone', !td.isDone)
+    TodoStore.editTodo(id, 'isDone', !td.isDone)
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
-    console.log('key', e.key)
+
     if (e.key === 'Escape' ) {
       setIsEditing(false);
       setNewTitle('')
@@ -80,7 +80,7 @@ export const Todo = ({td}: ITodo): JSX.Element => {
       
       <div
         className={styles.delete_button}
-        onClick={() => todos.removeTodo(td.id)}
+        onClick={() => TodoStore.removeTodo(td.id)}
       >
        <TrashCanSvg />
       </div>

@@ -1,6 +1,6 @@
 import {observer} from 'mobx-react-lite'
 import { useEffect, useState } from "react";
-import users from '../../store/auth';
+import UserStore from '../../store/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { when } from 'mobx';
 import styles from './Login.module.scss'
@@ -10,19 +10,25 @@ export const Login = observer(() => {
     const [ username, setUsername] = useState('');
     const [ password, setPassword] = useState('');
 
-
     const  navigate = useNavigate()
 
+    useEffect(() => {
+        if(localStorage.getItem('user')) {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            UserStore.getUser(user)
+        }
+    },[UserStore.user])
+
     const onSubmit = () => {
+        
+
         if(username.length > 0 || password.length > 0) {
             
             const user = {
-                id: Date.now().toString(),
                 username: username,
-                password: password,
-                access: !users.access,
+                password: password
             } 
-            users.loginUser(user)
+            UserStore.loginUser(user)
 
         }
         else {
@@ -33,7 +39,7 @@ export const Login = observer(() => {
   
     useEffect(() => {   
         when(
-            () => users.access === true,
+            () => UserStore.access === true,
             () => {
             navigate('/')
         }

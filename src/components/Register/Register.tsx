@@ -17,8 +17,7 @@ export const RegisterPage = () => {
             const user = {
                 id: Date.now().toString(),
                 username: userName,
-                password: password,
-                access: true,
+                password: password
             }
           
             navigate('/login')
