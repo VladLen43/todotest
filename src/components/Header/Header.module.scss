@@ -8,36 +8,50 @@
     overflow-y: visible;
 
    
-    .buttons {
+    .account_buttons {
         display: flex;
         flex-direction: column;
+    }
+        button{
+        
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            color: white;
+            background-color: transparent;   
+            transition: all 0.3s ease-in-out;            
+    }
+    
 
             .parent_button {
-                margin-top: 68px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: auto;
                 cursor: pointer;
+                padding: 20px;
+                max-height: 50px;
             }
+      
+        .open_button {
+            position: absolute;
+            right: 5px;
+            top: 55px;
+            width: 60px;
+            font-size: 14px;
+            font-weight: 600;
 
-
-            button{
-                cursor: pointer;
-                padding: 10px;
-                border: none;
-                color: white;
-                background-color:#9E78CF;               
+            .open{
+                opacity: 1;
+                border: 1px solid #9E78CF; 
+                border-radius: 7px;     
+                color: #9E78CF;
+                
+            }
+            .close {
+                background-color: transparent;
+                opacity: 0;
+            }
         }
-        
-        #opened_buttons {
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            flex-direction: column;
-        }
-        .open{
-            opacity: 1;
-        }
-        .close {
-            opacity: 0;
-            background-color: transparent;
-
-        }
+       
     }
-}

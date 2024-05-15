@@ -31,6 +31,10 @@
         }
 
        .list_done{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        
             .done{
                 text-decoration: line-through;
                 color: #78CFB0;

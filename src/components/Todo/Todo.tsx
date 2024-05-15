@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import todos from "../../store/todo";
+import TodoStore from "../../store/todo";
 import styles from "./Todo.module.scss";
-import { AcceptSvg } from "./AcceptSvg";
-import { TrashCanSvg } from "./TrashCanSvg";
+import { TrashIcon } from "../../assets/icons";
+import { AcceptIcon } from "../../assets/icons";
 import { todoType } from "../../types";
+import { when } from 'mobx';
 
 interface ITodo{
   td: todoType
@@ -14,9 +15,20 @@ export const Todo = ({td}: ITodo): JSX.Element => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
+  useEffect(() => {
+  
+    when(
+      () => TodoStore.todoId !== td.id,
+      () => {
+        setIsEditing(false);
+    }
+  );
+
+  },[TodoStore.todoId])
+
   const changeTodoTitle = () => {
     if(newTitle.length > 0){
-      todos.editTodo(td.id, 'title', newTitle) 
+      TodoStore.editTodo(td.id, 'title', newTitle) 
       setNewTitle('')
       setIsEditing(false)
     }
@@ -25,16 +37,17 @@ export const Todo = ({td}: ITodo): JSX.Element => {
 
   const handleSetEdit = () => {
     if(isEditing) return
-    setIsEditing(true)
     setNewTitle(td.title)
+    setIsEditing(true)
+    TodoStore.getTodoId(td.id)
   }
 
   const changeTodoStatus = (id: string) => {
-    todos.editTodo(id, 'isDone', !td.isDone)
+    TodoStore.editTodo(id, 'isDone', !td.isDone)
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
-    console.log('key', e.key)
+
     if (e.key === 'Escape' ) {
       setIsEditing(false);
       setNewTitle('')
@@ -74,15 +87,15 @@ export const Todo = ({td}: ITodo): JSX.Element => {
         className={styles.todo_complete}
         onClick={() => changeTodoStatus(td.id)}    
       >
-           <AcceptSvg />  
+           <AcceptIcon />  
         
       </div>
       
       <div
         className={styles.delete_button}
-        onClick={() => todos.removeTodo(td.id)}
+        onClick={() => TodoStore.removeTodo(td.id)}
       >
-       <TrashCanSvg />
+       <TrashIcon />
       </div>
     </div>
 </div>
