@@ -1,21 +1,21 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home/Home';
 import styles from './App.module.scss'
-import { Main } from './components/Main/Main';
 import { Login } from './components/LoginComp/Login';
 import { RegisterPage } from './components/Register/Register';
+import { PrivateRoutes } from './components/PrivateRoutes/PrivateRoutes';
 
 function App() {
   
   return (
     <div className={styles.container}>
-      <Main>
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<RegisterPage />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<RegisterPage />} />
+              <Route element={<PrivateRoutes />}>
+                  <Route path='/' element={<Home />} />
+              </Route>
         </Routes>
-        </Main>
     </div>
   );
 }

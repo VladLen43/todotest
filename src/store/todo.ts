@@ -14,6 +14,9 @@ class Todo {
     }
     
 
+    getTodoId (id: string)  {
+        this.todoId = id
+    }
     getTodos(todos: any) {
         this.todos = todos
     }

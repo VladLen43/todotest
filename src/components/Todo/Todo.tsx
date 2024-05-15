@@ -4,6 +4,7 @@ import styles from "./Todo.module.scss";
 import { TrashIcon } from "../../assets/icons";
 import { AcceptIcon } from "../../assets/icons";
 import { todoType } from "../../types";
+import { when } from 'mobx';
 
 interface ITodo{
   td: todoType
@@ -13,6 +14,17 @@ export const Todo = ({td}: ITodo): JSX.Element => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+
+  useEffect(() => {
+  
+    when(
+      () => TodoStore.todoId !== td.id,
+      () => {
+        setIsEditing(false);
+    }
+  );
+
+  },[TodoStore.todoId])
 
   const changeTodoTitle = () => {
     if(newTitle.length > 0){
@@ -25,8 +37,9 @@ export const Todo = ({td}: ITodo): JSX.Element => {
 
   const handleSetEdit = () => {
     if(isEditing) return
-    setIsEditing(true)
     setNewTitle(td.title)
+    setIsEditing(true)
+    TodoStore.getTodoId(td.id)
   }
 
   const changeTodoStatus = (id: string) => {
