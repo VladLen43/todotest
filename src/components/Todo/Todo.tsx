@@ -19,7 +19,7 @@ export const Todo: React.FC<TodoProps> = ({ id, title, completed }) => {
     setIsEditing(!isEditing);
   };
   const back = (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
+    if (e.key === "Escape") {
       setIsEditing(false);
     }
   };

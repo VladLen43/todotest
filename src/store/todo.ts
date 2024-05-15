@@ -11,14 +11,11 @@ configure({
 
 class Todo {
 
-
     todos : todoType[] = toJS([])
-
 
     constructor() {
         makeAutoObservable(this)
     }
-
 
     async getTodos(user : any) {
 
@@ -33,7 +30,6 @@ class Todo {
     }
 
     async addTodo(todo: any) {
-
 
         try {
             const acceptableTodo = {
@@ -62,8 +58,7 @@ class Todo {
 
         } catch (err) {
             alert(err)
-        }
-       
+        }  
 
     }
     
@@ -76,14 +71,21 @@ class Todo {
             alert(e)
         }
     }
-    
-    
-    changeTodo(id: string, title: string) {
+     
+    async changeTodo(id: string, title: string) {
         if(title.length > 0 ) {
             this.todos = this.todos.map((todo: todoType) => todo._id === id ? {...todo, title : title} : todo)
         } else {
             this.todos = this.todos.map((todo : todoType) => todo._id === id ? {...todo, title : todo.title} : todo)
         }
+        const fields = {
+            title,
+            text : 'sdsd',
+            priority: 1,
+            tags : 'sadada',
+            imageUrl: '3432432'
+        }
+       await axios.patch(`/todos/${id}`, fields)
     }
 }
 export default new Todo()

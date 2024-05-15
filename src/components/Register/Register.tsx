@@ -20,16 +20,13 @@ export const RegisterPage = () => {
                 email: email,
                 avatarUrl: 'eeesss',
                 
-            }
-            
+            }     
 
             users.addUser(user)
             navigate('/login')
     }
     }
-  
         
-
     
   return (
     <div className={styles.container}>
@@ -37,6 +34,7 @@ export const RegisterPage = () => {
         <input type="text" placeholder='Select your name' value={userName} onChange={(e) => setUserName(e.target.value)} />
         <input type="password" placeholder='Select your password'value={password} onChange={(e) => setPassword(e.target.value)} />
         <button onClick={() => onSubmit()}>Зарегестироваться</button>
+        
     </div>
   )
 }

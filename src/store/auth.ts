@@ -3,12 +3,9 @@ import { UserType } from "../types"
 import axios from '../axios'
 
 
-
 const token = localStorage.getItem("token") ? true : false;
 
-
 class Auth {
-
 
     user: UserType = {
             fullName: "",
@@ -24,8 +21,7 @@ class Auth {
 
 
     async loginUser(userData: UserType) {
-     
-        
+            
         const  { data }  = await axios.post('/auth/login', userData)    
 
         localStorage.setItem("token",data.token)
@@ -38,16 +34,14 @@ class Auth {
             localStorage.removeItem("token")
             this.user.access = false;
         }
-
      
     async addUser (params :any)  {
          
         const { data } = await axios.post('/auth/register', params)
 
-
         return data
            
-        }
+     }
   
 }
 export default new Auth()
