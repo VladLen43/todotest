@@ -9,9 +9,7 @@ export const Login = observer(() => {
 
     const [ username, setUsername] = useState('');
     const [ password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-
-    
+    const [email, setEmail] = useState('');   
 
     const  navigate = useNavigate()
 

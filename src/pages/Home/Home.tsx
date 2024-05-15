@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import  TodoStore  from '../../store/todo'
 import styles from '../../App.module.scss'
 import { TodoAdd } from '../../components/TodoAdd/TodoAdd'
@@ -21,8 +21,6 @@ export const Home = observer(() => {
     const navigate = useNavigate()
 
     const user = JSON.parse(localStorage.getItem('user') || '{}') 
-    console.log(user._id)
-
   
 
     useEffect(() => {   
@@ -36,8 +34,8 @@ export const Home = observer(() => {
     },[])
 
 
-    const doneTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === true)
-    const uncompletedTodos = TodoStore.todos.filter((todo: todoType) => todo.completed === false)
+    const doneTodos = useMemo(() => TodoStore.todos.filter((todo: todoType) => todo.completed === true),[TodoStore.todos])
+    const uncompletedTodos = useMemo(() => TodoStore.todos.filter((todo: todoType) => todo.completed === false),[TodoStore.todos])
   
 
   return (
@@ -65,7 +63,7 @@ export const Home = observer(() => {
                       }
                     </div>
                 ))
-              }
+            }
         </div>
     </div>
   )

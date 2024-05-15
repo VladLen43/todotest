@@ -30,8 +30,7 @@ class Auth {
 
         localStorage.setItem("token",data.token)
         localStorage.setItem("user", JSON.stringify(data))
-        this.user.access = true
-       
+        this.user.access = true  
     
     }
 

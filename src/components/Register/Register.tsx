@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import users from '../../store/auth'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from './Register.module.scss'
 
 

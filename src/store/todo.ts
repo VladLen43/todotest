@@ -49,7 +49,7 @@ class Todo {
     
         }
          catch(err) {
-            console.log(err)
+            alert(err)
          }
        
     }
@@ -61,7 +61,7 @@ class Todo {
             await  axios.delete(`/todos/${id}`)
 
         } catch (err) {
-            console.log(err)
+            alert(err)
         }
        
 
@@ -73,7 +73,7 @@ class Todo {
             const { data } = await axios.patch(`/todos/${td._id}`, td)
 
         } catch (e) {
-            console.error(e)
+            alert(e)
         }
     }
     
